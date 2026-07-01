@@ -10,10 +10,9 @@ try {
     dotnet build --configuration Debug
     $loggerDll = "$PSScriptRoot\bin\Debug\netstandard2.0\MsBuildForwardingLoggerRepro.dll"
     . $Msbuild $SolutionOrProject `
-        /p:platform="x64" /p:configuration="Debug" `
         /t:rebuild `
         /nodeReuse:false `
-        "/distributedLogger:MyCentralLogger,$loggerDll*MyForwardingLogger,$loggerDll"
+        /DistributedLogger:"MyCentralLogger,$loggerDll*MyForwardingLogger,$loggerDll"
 
 } finally {
     Pop-Location

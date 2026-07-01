@@ -1,4 +1,5 @@
 ﻿using Microsoft.Build.Framework;
+using System;
 using System.IO;
 
 namespace MsBuildForwardingLoggerRepro;
@@ -17,7 +18,8 @@ public sealed class MyForwardingLogger : IForwardingLogger
 
     public void Initialize(IEventSource eventSource)
     {
-        File.AppendAllText(@"E:\temp\ForwardingLogger.txt", "Initialized - foo\n");
+        var path = Path.Combine(Environment.GetEnvironmentVariable("TMP"), "ForwardingLogger.txt"); 
+        File.AppendAllText(path, "Initialize called\n");
     }
 
     public void Shutdown()
